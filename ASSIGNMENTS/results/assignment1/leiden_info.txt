@@ -1,0 +1,19 @@
+====================
+LEIDEN RESULTS
+====================
+
+Nodes: 3579
+Edges: 780397
+Total communities: 734
+
+Largest communities:
+0: 960 nodes
+1: 907 nodes
+2: 639 nodes
+3: 288 nodes
+4: 20 nodes
+5: 13 nodes
+6: 11 nodes
+7: 8 nodes
+8: 4 nodes
+9: 3 nodes

@@ -1,0 +1,20 @@
+====================
+LOUVAIN RESULTS
+====================
+
+Nodes: 3579
+Edges: 780397
+Total communities: 799
+Communities bigger than 20 nodes: 14
+
+Largest communities:
+3: 514 nodes
+23: 334 nodes
+5: 332 nodes
+47: 275 nodes
+94: 274 nodes
+102: 218 nodes
+9: 202 nodes
+4: 152 nodes
+18: 147 nodes
+0: 104 nodes
