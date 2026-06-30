@@ -6,4 +6,5 @@ Edges: 780397
 Density: 0.12188311701495791
 Average clustering: 0.6295877933127655
 Assortativity: 0.1744737710897193
-Average path length: 1.934045102184637
+Average path length: 1.9180467465351185
+Diameter: 5

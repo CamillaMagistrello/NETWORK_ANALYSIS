@@ -1,10 +1,10 @@
 import pandas as pd
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-INPUT = BASE_DIR.parent / "data" / "anime_info.csv"
-OUTPUT = BASE_DIR.parent / "data" / "anime_filtered.csv"
+INPUT = BASE_DIR / "data" / "anime_info.csv"
+OUTPUT = BASE_DIR / "data" / "anime_filtered.csv"
 
 df = pd.read_csv(INPUT)
 

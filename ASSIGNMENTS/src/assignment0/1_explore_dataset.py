@@ -1,8 +1,8 @@
 import pandas as pd
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
-DATASET_PATH = BASE_DIR.parent / "data" / "anime_info.csv"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATASET_PATH = BASE_DIR / "data" / "anime_info.csv"
 df = pd.read_csv(DATASET_PATH)
 
 print("\n" + "=" * 50)

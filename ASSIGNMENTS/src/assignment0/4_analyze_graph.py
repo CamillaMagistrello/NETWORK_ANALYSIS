@@ -4,10 +4,10 @@ from pathlib import Path
 import random
 import csv
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-G = nx.read_gexf(BASE_DIR.parent.parent / "data" / "anime_network.gexf")
-RESULTS = BASE_DIR.parent.parent / "results" / "assignment0"
+G = nx.read_gexf(BASE_DIR / "data" / "anime_network.gexf")
+RESULTS = BASE_DIR / "results" / "assignment0"
 RESULTS.mkdir(exist_ok=True)
 
 print("NETWORK INFO")
@@ -33,6 +33,10 @@ for node, value in sorted(degree.items(), key=lambda x: x[1], reverse=True)[:10]
 largest = max(nx.connected_components(G), key=len)
 H = G.subgraph(largest)
 
+print("\nDiameter:")
+diameter = nx.diameter(H)
+print(diameter)
+
 print("\nAverage path length:")
 sample = random.sample(list(H.nodes()), 300)
 paths = []
@@ -55,6 +59,7 @@ with open(RESULTS / "metrics.txt", "w", encoding="utf-8") as file:
     file.write(f"Average clustering: {clustering}\n")
     file.write(f"Assortativity: {assortativity}\n")
     file.write(f"Average path length: {average_path}\n")
+    file.write(f"Diameter: {diameter}\n")
 
 # SAVE CENTRALITY
 with open(RESULTS / "centrality.csv", "w", newline="", encoding="utf-8") as file:

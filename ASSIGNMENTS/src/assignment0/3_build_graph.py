@@ -2,10 +2,10 @@ import pandas as pd
 import networkx as nx
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-INPUT = BASE_DIR.parent / "data" / "anime_filtered.csv"
-OUTPUT = BASE_DIR.parent / "data" / "anime_network.gexf"
+INPUT = BASE_DIR / "data" / "anime_filtered.csv"
+OUTPUT = BASE_DIR / "data" / "anime_network.gexf"
 
 df = pd.read_csv(INPUT)
 
