@@ -16,6 +16,7 @@ for node,degree in top_nodes:
         for j in range(i+1,len(neighbors)):
             if not G.has_edge(neighbors[i],neighbors[j]):
                 G.add_edge(neighbors[i], neighbors[j])
+                
 print("\nAfter adding edges")
 print("Nodes:",G.number_of_nodes())
 print("Edges:",G.number_of_edges())

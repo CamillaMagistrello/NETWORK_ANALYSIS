@@ -33,15 +33,22 @@ def spread_step(G, threshold=0.3):
             continue
 
         true_count = 0
+        false_count = 0
         for n in neighbors:
             if G.nodes[n]["message"]=="true":
-                true_count +=1
+                true_count += 1
+            elif G.nodes[n]["message"]=="false":
+                false_count += 1
 
-        if true_count / len(neighbors) >= threshold:
+        if max(true_count, false_count) / len(neighbors) >= threshold:
             if G.nodes[node]["type"]=="unintentional":
-                changes[node]="false"
+                if true_count >= false_count:
+                    changes[node]="false"
             else:
-                changes[node]="true"
+                if true_count >= false_count:
+                    changes[node]="true"
+                else:
+                    changes[node]="false"
 
     for node,msg in changes.items():
         G.nodes[node]["message"]=msg
