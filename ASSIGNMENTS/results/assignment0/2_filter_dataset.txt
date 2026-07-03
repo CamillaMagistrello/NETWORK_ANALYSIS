@@ -1,9 +1,0 @@
-DATASET FILTERING
-=================
-Original anime: 29816
-Filtered anime: 3579
-Removed anime: 26237
-
-Filtering criteria:
-- members >= 50000
-- genres not null
