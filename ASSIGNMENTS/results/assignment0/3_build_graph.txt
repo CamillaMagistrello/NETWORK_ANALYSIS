@@ -1,10 +1,15 @@
 GRAPH CONSTRUCTION
 ==================
+
 Input anime: 3579
 Nodes: 3579
-Edges: 780393
+Edges: 2905030
 
 Construction rule:
-- One node represents one anime.
-- An edge is created if two anime share at least 2 genres.
-- Edge weight = number of shared genres.
+- One node = one anime
+- Edge created if anime share at least 1 genre
+- Weight = number of shared genres
+
+Optimization:
+- Replaced O(n^2) comparison with genre-based indexing
+- Uses inverted index (genre → anime list)
