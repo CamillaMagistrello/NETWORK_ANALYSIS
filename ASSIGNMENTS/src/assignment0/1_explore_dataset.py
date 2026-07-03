@@ -2,36 +2,47 @@ import pandas as pd
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 DATASET_PATH = BASE_DIR / "data" / "anime_info.csv"
+RESULTS_DIR = BASE_DIR / "results" / "assignment0"
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+
+OUTPUT = RESULTS_DIR / "1_explore_dataset.txt"
+
 df = pd.read_csv(DATASET_PATH)
 
-print("\n" + "=" * 50)
-print("DATASET SHAPE")
-print("=" * 50)
+with open(OUTPUT, "w", encoding="utf-8") as f:
 
-print(f"Rows: {df.shape[0]}")
-print(f"Columns: {df.shape[1]}")
+    def write(text=""):
+        print(text)
+        f.write(str(text) + "\n")
 
-print("\n" + "=" * 50)
-print("COLUMNS")
-print("=" * 50)
+    write("\n" + "=" * 50)
+    write("DATASET SHAPE")
+    write("=" * 50)
 
-for col in df.columns:
-    print(col)
+    write(f"Rows: {df.shape[0]}")
+    write(f"Columns: {df.shape[1]}")
 
-print("\n" + "=" * 50)
-print("MISSING VALUES")
-print("=" * 50)
+    write("\n" + "=" * 50)
+    write("COLUMNS")
+    write("=" * 50)
 
-missing = df.isnull().sum().sort_values(ascending=False)
-print(missing[missing > 0])
+    for col in df.columns:
+        write(col)
 
-print("\n" + "=" * 50)
-print("SAMPLE ANIME")
-print("=" * 50)
+    write("\n" + "=" * 50)
+    write("MISSING VALUES")
+    write("=" * 50)
 
-print(
-    df[
+    missing = df.isnull().sum().sort_values(ascending=False)
+    write(missing[missing > 0].to_string())
+
+    write("\n" + "=" * 50)
+    write("SAMPLE ANIME")
+    write("=" * 50)
+
+    sample = df[
         [
             "title",
             "genres",
@@ -41,69 +52,78 @@ print(
             "members",
         ]
     ].head(10)
-)
 
-print("\n" + "=" * 50)
-print("TYPE DISTRIBUTION")
-print("=" * 50)
+    write(sample.to_string())
 
-print(df["type"].value_counts())
+    write("\n" + "=" * 50)
+    write("TYPE DISTRIBUTION")
+    write("=" * 50)
 
-print("\n" + "=" * 50)
-print("DEMOGRAPHICS")
-print("=" * 50)
+    write(df["type"].value_counts().to_string())
 
-print(df["demographics"].value_counts(dropna=False))
+    write("\n" + "=" * 50)
+    write("DEMOGRAPHICS")
+    write("=" * 50)
 
-print("\n" + "=" * 50)
-print("TOP 20 BY MEMBERS")
-print("=" * 50)
+    write(df["demographics"].value_counts(dropna=False).to_string())
 
-top_members = (
-    df[["title", "members"]]
-    .sort_values("members", ascending=False)
-    .head(20)
-)
+    write("\n" + "=" * 50)
+    write("TOP 20 BY MEMBERS")
+    write("=" * 50)
 
-print(top_members)
+    top_members = (
+        df[["title", "members"]]
+        .sort_values("members", ascending=False)
+        .head(20)
+    )
 
-print("\n" + "=" * 50)
-print("TOP 20 BY SCORE")
-print("=" * 50)
+    write(top_members.to_string(index=False))
 
-top_score = (
-    df[df["score"].notna()]
-    [["title", "score"]]
-    .sort_values("score", ascending=False)
-    .head(20)
-)
+    write("\n" + "=" * 50)
+    write("TOP 20 BY SCORE")
+    write("=" * 50)
 
-print(top_score)
+    top_score = (
+        df[df["score"].notna()][["title", "score"]]
+        .sort_values("score", ascending=False)
+        .head(20)
+    )
 
-print("\n" + "=" * 50)
-print("MOST COMMON GENRES")
-print("=" * 50)
+    write(top_score.to_string(index=False))
 
-genre_counter = {}
-for genres in df["genres"].dropna():
-    for genre in str(genres).split("|"):
-        genre = genre.strip()
-        if genre:
-            genre_counter[genre] = genre_counter.get(genre, 0) + 1
+    write("\n" + "=" * 50)
+    write("MOST COMMON GENRES")
+    write("=" * 50)
 
-genre_df = (pd.DataFrame(genre_counter.items(), columns=["genre", "count"]).sort_values("count", ascending=False))
-print(genre_df.head(20))
-print("\n" + "=" * 50)
-print("MOST COMMON THEMES")
-print("=" * 50)
+    genre_counter = {}
+    for genres in df["genres"].dropna():
+        for genre in str(genres).split("|"):
+            genre = genre.strip()
+            if genre:
+                genre_counter[genre] = genre_counter.get(genre, 0) + 1
 
-theme_counter = {}
-for themes in df["themes"].dropna():
-    for theme in str(themes).split("|"):
-        theme = theme.strip()
-        if theme:
-            theme_counter[theme] = theme_counter.get(theme, 0) + 1
+    genre_df = (
+        pd.DataFrame(genre_counter.items(), columns=["genre", "count"])
+        .sort_values("count", ascending=False)
+    )
 
-theme_df = (pd.DataFrame(theme_counter.items(), columns=["theme", "count"]).sort_values("count", ascending=False))
-print(theme_df.head(20))
-print("\nDataset exploration completed.")
+    write(genre_df.head(20).to_string(index=False))
+
+    write("\n" + "=" * 50)
+    write("MOST COMMON THEMES")
+    write("=" * 50)
+
+    theme_counter = {}
+    for themes in df["themes"].dropna():
+        for theme in str(themes).split("|"):
+            theme = theme.strip()
+            if theme:
+                theme_counter[theme] = theme_counter.get(theme, 0) + 1
+
+    theme_df = (
+        pd.DataFrame(theme_counter.items(), columns=["theme", "count"])
+        .sort_values("count", ascending=False)
+    )
+    write(theme_df.head(20).to_string(index=False))
+    write("\nDataset exploration completed.")
+print(f"\nResults saved to:\n{OUTPUT}")

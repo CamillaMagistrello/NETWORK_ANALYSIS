@@ -6,78 +6,119 @@ import csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-G = nx.read_gexf(BASE_DIR / "data" / "anime_network.gexf")
+GRAPH = BASE_DIR / "data" / "anime_network.gexf"
 RESULTS = BASE_DIR / "results" / "assignment0"
-RESULTS.mkdir(exist_ok=True)
+RESULTS.mkdir(parents=True, exist_ok=True)
 
-print("NETWORK INFO")
+G = nx.read_gexf(GRAPH)
+
+# ====================
+# NETWORK METRICS
+# ====================
+
 nodes = G.number_of_nodes()
 edges = G.number_of_edges()
+
 density = nx.density(G)
+average_degree = sum(dict(G.degree()).values()) / nodes
 clustering = nx.average_clustering(G)
 assortativity = nx.degree_assortativity_coefficient(G)
-print("Nodes:", nodes)
-print("Edges:", edges)
-print("\nDensity:")
-print(density)
-print("\nAverage clustering:")
-print(clustering)
-print("\nAssortativity:")
-print(assortativity)
-print("\nTop degree centrality:")
+components = nx.number_connected_components(G)
+
+# Degree centrality
 degree = nx.degree_centrality(G)
-top_nodes = []
-for node, value in sorted(degree.items(), key=lambda x: x[1], reverse=True)[:10]:
-    print(G.nodes[node]["title"], value)
-    top_nodes.append([G.nodes[node]["title"], value])
+
+top_nodes = sorted(
+    degree.items(),
+    key=lambda x: x[1],
+    reverse=True
+)[:10]
+
+# ====================
+# LARGEST COMPONENT
+# ====================
+
 largest = max(nx.connected_components(G), key=len)
 H = G.subgraph(largest)
 
-print("\nDiameter:")
+# Diameter
 diameter = nx.diameter(H)
-print(diameter)
 
-print("\nAverage path length:")
-sample = random.sample(list(H.nodes()), 300)
+# Faster average shortest path estimate
+sample_size = min(50, H.number_of_nodes())
+sample = random.sample(list(H.nodes()), sample_size)
+
 paths = []
 for node in sample:
-    distances = nx.single_source_shortest_path_length(H, node)
-    paths.extend(distances.values())
+    lengths = nx.single_source_shortest_path_length(H, node)
+    paths.extend(lengths.values())
+
 average_path = sum(paths) / len(paths)
-print(average_path)
 
+# ====================
 # SAVE METRICS
-with open(RESULTS / "metrics.txt", "w", encoding="utf-8") as file:
+# ====================
 
-    file.write("====================\n")
-    file.write("NETWORK INFO\n")
-    file.write("====================\n")
+REPORT = RESULTS / "4_analyze_graph.txt"
 
-    file.write(f"Nodes: {nodes}\n")
-    file.write(f"Edges: {edges}\n")
-    file.write(f"Density: {density}\n")
-    file.write(f"Average clustering: {clustering}\n")
-    file.write(f"Assortativity: {assortativity}\n")
-    file.write(f"Average path length: {average_path}\n")
-    file.write(f"Diameter: {diameter}\n")
+with open(REPORT, "w", encoding="utf-8") as file:
 
-# SAVE CENTRALITY
+    def write(text=""):
+        print(text)
+        file.write(str(text) + "\n")
+
+    write("====================")
+    write("NETWORK INFO")
+    write("====================")
+
+    write(f"Nodes: {nodes}")
+    write(f"Edges: {edges}")
+    write(f"Density: {density:.6f}")
+    write(f"Average degree: {average_degree:.2f}")
+    write(f"Average clustering: {clustering:.6f}")
+    write(f"Assortativity: {assortativity:.6f}")
+    write(f"Connected components: {components}")
+    write(f"Diameter: {diameter}")
+    write(f"Average path length (estimated): {average_path:.6f}")
+
+    write("")
+    write("====================")
+    write("TOP DEGREE CENTRALITY")
+    write("====================")
+
+    centrality_rows = []
+
+    for node, value in top_nodes:
+        title = G.nodes[node]["title"]
+        write(f"{title}: {value:.6f}")
+        centrality_rows.append([title, value])
+
+# ====================
+# SAVE CENTRALITY CSV
+# ====================
+
 with open(RESULTS / "centrality.csv", "w", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)
-    writer.writerow(["anime", "centrality"])
-    for row in top_nodes:
-        writer.writerow(row)
+    writer.writerow(["Anime", "Degree Centrality"])
+    writer.writerows(centrality_rows)
 
-# SAVE GRAPH
+# ====================
+# DEGREE DISTRIBUTION
+# ====================
+
 degrees = [d for _, d in G.degree()]
 
-plt.hist(degrees, bins=50)
+plt.figure(figsize=(8, 5))
+plt.hist(degrees, bins=50, edgecolor="black")
 
 plt.xlabel("Degree")
 plt.ylabel("Frequency")
-plt.title("Degree distribution")
+plt.title("Degree Distribution")
+
+plt.tight_layout()
 plt.savefig(RESULTS / "degree_distribution.png", dpi=300)
 
 plt.close()
+
 print("\nResults saved in:")
 print(RESULTS)

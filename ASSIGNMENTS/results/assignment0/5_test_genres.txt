@@ -1,0 +1,16 @@
+====================
+GENRE STATISTICS
+====================
+Anime: 3579
+
+Unique genre combinations:
+490
+
+Genres per anime:
+1 genres -> 718 anime
+2 genres -> 1176 anime
+3 genres -> 1061 anime
+4 genres -> 459 anime
+5 genres -> 146 anime
+6 genres -> 18 anime
+7 genres -> 1 anime

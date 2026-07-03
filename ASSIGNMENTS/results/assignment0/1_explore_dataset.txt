@@ -1,0 +1,224 @@
+
+==================================================
+DATASET SHAPE
+==================================================
+Rows: 29816
+Columns: 39
+
+==================================================
+COLUMNS
+==================================================
+mal_id
+title
+title_english
+title_japanese
+title_synonyms
+mal_url
+image_url
+type
+source
+episodes
+status
+airing
+aired_from
+aired_to
+aired_string
+duration
+content_rating
+score
+scored_by
+rank
+popularity
+members
+favorites
+season
+year
+broadcast_day
+broadcast_time
+studios
+producers
+licensors
+genres
+themes
+demographics
+opening_themes
+ending_themes
+synopsis
+background
+approved
+trailer_url
+
+==================================================
+MISSING VALUES
+==================================================
+opening_themes    29816
+ending_themes     29816
+trailer_url       29816
+background        26554
+broadcast_day     25254
+broadcast_time    25254
+licensors         24632
+season            23294
+year              23294
+demographics      18767
+aired_to          18237
+title_english     16579
+producers         15604
+title_synonyms    15193
+themes            11990
+studios           11742
+score             10030
+scored_by         10030
+rank               7405
+genres             6297
+synopsis           4970
+aired_from          904
+episodes            833
+content_rating      612
+title_japanese      121
+type                 69
+
+==================================================
+SAMPLE ANIME
+==================================================
+                             title                             genres                               themes demographics  score  members
+0                     Cowboy Bebop        Action|Award Winning|Sci-Fi                     Adult Cast|Space          NaN   8.75  2060957
+1  Cowboy Bebop: Tengoku no Tobira                      Action|Sci-Fi                     Adult Cast|Space          NaN   8.38   412490
+2                           Trigun            Action|Adventure|Sci-Fi                           Adult Cast      Shounen   8.22   835922
+3               Witch Hunter Robin  Action|Drama|Mystery|Supernatural                            Detective          NaN   7.24   129660
+4                   Bouken Ou Beet           Action|Adventure|Fantasy                                  NaN      Shounen   6.96    16635
+5                     Eyeshield 21                             Sports                          Team Sports      Shounen   7.91   196013
+6             Hachimitsu to Clover               Comedy|Drama|Romance  Adult Cast|Love Polygon|Visual Arts        Josei   7.98   285691
+7       Hungry Heart: Wild Striker                             Sports                          Team Sports      Shounen   7.56    26748
+8           Initial D Fourth Stage                       Action|Drama                               Racing       Seinen   8.18   215675
+9                          Monster             Drama|Mystery|Suspense             Adult Cast|Psychological       Seinen   8.89  1333646
+
+==================================================
+TYPE DISTRIBUTION
+==================================================
+type
+TV            8682
+Movie         4966
+ONA           4294
+Music         4248
+OVA           4205
+Special       1750
+TV Special     792
+CM             497
+PV             313
+
+==================================================
+DEMOGRAPHICS
+==================================================
+demographics
+NaN               18767
+Kids               6895
+Shounen            2207
+Seinen             1194
+Shoujo              541
+Josei               160
+Kids|Shounen         50
+Kids|Shoujo           1
+Seinen|Shounen        1
+
+==================================================
+TOP 20 BY MEMBERS
+==================================================
+                             title  members
+                Shingeki no Kyojin  4370845
+                        Death Note  4308593
+  Fullmetal Alchemist: Brotherhood  3691258
+                     One Punch Man  3526041
+                  Kimetsu no Yaiba  3457513
+             Boku no Hero Academia  3313023
+                  Sword Art Online  3305192
+            Hunter x Hunter (2011)  3196311
+                            Naruto  3123350
+                       Tokyo Ghoul  3061870
+                    Jujutsu Kaisen  3048040
+                    Kimi no Na wa.  3033741
+       Shingeki no Kyojin Season 2  3027102
+                       Steins;Gate  2818505
+                Naruto: Shippuuden  2754163
+  Boku no Hero Academia 2nd Season  2738808
+                         One Piece  2687998
+       Shingeki no Kyojin Season 3  2673418
+                    Koe no Katachi  2623167
+Shingeki no Kyojin Season 3 Part 2  2600242
+
+==================================================
+TOP 20 BY SCORE
+==================================================
+                                           title  score
+                               Sousou no Frieren   9.26
+        Steel Ball Run: JoJo no Kimyou na Bouken   9.13
+                Fullmetal Alchemist: Brotherhood   9.11
+                                     Steins;Gate   9.07
+                    Chainsaw Man Movie: Reze-hen   9.07
+                              Gintama: The Final   9.05
+              Shingeki no Kyojin Season 3 Part 2   9.05
+                                        Gintama°   9.05
+                          Hunter x Hunter (2011)   9.03
+                             Gintama': Enchousen   9.02
+                                        Gintama'   9.02
+                            Ginga Eiyuu Densetsu   9.02
+                            One Piece Fan Letter   9.01
+                                        Gintama.   8.98
+                       Bleach: Sennen Kessen-hen   8.98
+      Kaguya-sama wa Kokurasetai: Ultra Romantic   8.95
+Re:Zero kara Hajimeru Isekai Seikatsu 4th Season   8.94
+                            Clannad: After Story   8.93
+                                  Koe no Katachi   8.93
+                                         Gintama   8.93
+
+==================================================
+MOST COMMON GENRES
+==================================================
+        genre  count
+       Comedy   7910
+      Fantasy   6181
+       Action   4965
+    Adventure   4570
+       Sci-Fi   3533
+        Drama   3152
+      Romance   2292
+       Hentai   1612
+ Supernatural   1568
+Slice of Life   1266
+  Avant Garde   1093
+      Mystery   1026
+       Sports    825
+        Ecchi    824
+       Horror    591
+     Suspense    479
+      Gourmet    256
+Award Winning    255
+    Boys Love    205
+   Girls Love    126
+
+==================================================
+MOST COMMON THEMES
+==================================================
+          theme  count
+          Music   5395
+         School   2286
+     Historical   1881
+          Mecha   1347
+Anthropomorphic   1346
+         Parody    814
+     Adult Cast    786
+   Martial Arts    778
+       Military    746
+    Super Power    742
+          Space    685
+      Mythology    552
+         Isekai    507
+          Harem    499
+  Psychological    475
+ Idols (Female)    414
+   Mahou Shoujo    376
+    Educational    359
+  Strategy Game    341
+    Team Sports    327
+
+Dataset exploration completed.
