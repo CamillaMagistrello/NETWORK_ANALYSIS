@@ -18,11 +18,6 @@ ASSIGNMENTS/
 ├── data/
 │   ├── anime_info.csv
 |   ├── anime_filtered.csv
-├── reports/
-│   ├── Assignment0.pdf
-│   ├── Assignment1.pdf
-│   ├── Assignment2.pdf
-│   └── Assignment3.pdf
 └── src/
     ├── assignment0.ipynb
     ├── assignment1.ipynb
